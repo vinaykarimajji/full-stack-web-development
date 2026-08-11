@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Information Portal</title>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header>
+        <h1>ANITS - College Information Portal</h1>
+
+        <p>
+            Welcome to <b>Anil Neerukonda Institute of Technology and Sciences (ANITS)</b>,
+            Visakhapatnam.
+        </p>
+    </header>
+
+    <!-- ================= NAVIGATION ================= -->
+    <nav>
+        <a href="#about">About</a> |
+        <a href="#courses">Courses</a> |
+        <a href="#students">Students</a> |
+        <a href="#register">Registration</a>
+    </nav>
+
+    <hr>
+
+    <!-- ================= SECTION ================= -->
+    <section id="about">
+
+        <article>
+
+            <h2>About ANITS</h2>
+
+            <p>
+                <b>ANITS</b> is one of the premier engineering colleges in Andhra Pradesh.
+                It offers quality education with excellent laboratories,
+                experienced faculty and placement opportunities.
+            </p>
+
+            <h3>Text Formatting Example</h3>
+
+            <p>
+                <b>Vinay</b>(boldtext)<br>
+                <i>Vijay</i>(Italic Text)<br>
+                <u>jyothi</u>(Underlined Text)<br>
+                H<sub>2</sub>O (Subscript)<br>
+                x<sup>2</sup> + y<sup>2</sup> (Superscript)
+            </p>
+
+        </article>
+
+    </section>
+
+    <hr>
+
+    <!-- ================= LISTS ================= -->
+
+    <section id="courses">
+
+        <h2>Courses Offered (Ordered List)</h2>
+
+        <ol>
+            <li>CSE</li>
+            <li>CSE(AI&ML)</li>
+            <li>CSD</li>
+            <li>MECH</li>
+            <li>EEE</li>
+        </ol>
+
+        <h2>College Facilities (Unordered List)</h2>
+
+        <ul>
+            <li>Central Library</li>
+            <li>Computer Labs</li>
+            <li>Hostel</li>
+            <li>play ground</li>
+            <li>Transport Facility</li>
+        </ul>
+
+    </section>
+
+    <hr>
+
+    <!-- ================= HYPERLINKS ================= -->
+
+    <h2>Useful Links</h2>
+
+    <a href="https://anits.org/" target="_self">
+        Visit ANITS Website
+    </a>
+
+    <br><br>
+
+    <a href="https://www.google.com" target="_blank">
+        Visit Google
+    </a>
+
+    <br><br>
+
+    <a href="https://www.youtube.com" target="_parent">
+        Visit youtube
+    </a>
+    <hr>
+
+    <!-- ================= TABLE ================= -->
+
+    <section id="students">
+
+        <h2>Student Details</h2>
+
+        <table border="1" cellpadding="10">
+
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Branch</th>
+                <th>Email</th>
+            </tr>
+
+            <tr>
+                <td>101</td>
+                <td>Vinay</td>
+                <td>CSE(AI&ML)</td>
+                <td>vinay@gmail.com</td>
+            </tr>
+
+            <tr>
+                <td>102</td>
+                <td>Santhosh</td>
+                <td>CSE</td>
+                <td>santhosh@gmail.com</td>
+            </tr>
+
+            <tr>
+                <td>103</td>
+                <td>Vijay</td>
+                <td>MECH</td>
+                <td>vijay@gmail.com</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+    <hr>
+
+    <!-- ================= IMAGES ================= -->
+
+    <h2>College Logo</h2>
+
+    <img src="https://en.wikipedia.org/wiki/File:Anits_logo.jpg"
+         alt="ANITS College Logo"
+         width="200">
+
+    <br><br>
+
+    <h2>College Campus</h2>
+
+    <img src="https://anits.org/static/images/campus.jpg"
+         alt="ANITS Campus"
+         width="500">
+
+    <hr>
+
+    <!-- ================= FORM ================= -->
+
+    <section id="register">
+
+        <h2>Student Registration Form</h2>
+
+        <form>
+
+            <label>Name:</label><br>
+            <input type="text" placeholder="Enter your name">
+            <br><br>
+
+            <label>Email:</label><br>
+            <input type="email" required placeholder="Enter your email">
+
+            <br><br>
+
+            <label>Password:</label><br>
+            <input type="password">
+
+            <br><br>
+
+            <label>Date of Birth:</label><br>
+            <input type="date">
+
+            <br><br>
+
+            <label>Age:</label><br>
+            <input type="number">
+
+            <br><br>
+
+            <label>Favourite Color:</label><br>
+            <input type="color">
+
+            <br><br>
+
+            <label>Programming Skill:</label><br>
+            <input type="range">
+
+            <br><br>
+
+            <label>Gender:</label><br>
+
+            <input type="radio" name="gender"> Male
+
+            <input type="radio" name="gender"> Female
+
+            <input type="radio" name="gender"> Other
+
+            <br><br>
+
+            <label>Hobbies:</label><br>
+
+            <input type="checkbox"> Reading
+
+            <input type="checkbox"> Coding
+
+            <input type="checkbox"> Sports
+
+            <br><br>
+
+            <label>Branch:</label>
+
+            <select>
+
+                <option>CSE</option>
+
+                <option selected>CSE(AI&ML)</option>
+
+                <option>ECE</option>
+
+                <option>EEE</option>
+
+                <option>IT</option>
+
+            </select>
+
+            <br><br>
+
+            <label>Comments:</label><br>
+
+            <textarea rows="5" cols="40"></textarea>
+
+            <br><br>
+
+            <input type="submit" value="Submit">
+
+            <input type="reset" value="Reset">
+
+        </form>
+
+    </section>
+
+    <hr>
+
+    <!-- ================= AUDIO ================= -->
+
+    <h2>College Audio</h2>
+
+    <audio controls>
+
+        <source src="college.mp3" type="audio/mpeg">
+
+    </audio>
+
+    <hr>
+
+    <!-- ================= VIDEO ================= -->
+
+    <h2>College Video</h2>
+
+    <video width="500" controls>
+
+        <source src="https://youtu.be/LzKjue8PchA" type="video/mp4">
+
+    </video>
+
+    <hr>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 ANITS | College Information Portal
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

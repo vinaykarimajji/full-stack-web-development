@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Styled Webpage</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <h1>ANITS Web Technology Showcase</h1>
+
+        <p>
+            HTML5 Graphics & CSS3 Modern Web Styling
+        </p>
+
+    </header>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+
+        <a href="#">🏠 Home</a>
+
+        <a href="#canvas">🎨 Canvas</a>
+
+        <a href="#cards">💻 Technologies</a>
+
+        <a href="#footer">📞 Contact</a>
+
+    </nav>
+
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h2>Welcome to My Styled Webpage</h2>
+
+            <p>
+
+                This webpage demonstrates HTML5 Canvas and CSS3 styling
+                techniques including gradients, shadows,
+                hover effects and modern layouts.
+
+            </p>
+
+            <button>Explore More</button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CANVAS ================= -->
+
+    <section id="canvas">
+
+        <h2 class="section-title">
+
+            HTML5 Canvas Graphics
+
+        </h2>
+
+        <canvas id="myCanvas" width="850" height="350">
+
+            Your browser does not support Canvas.
+
+        </canvas>
+
+    </section>
+
+
+    <!-- ================= CARDS ================= -->
+
+    <section id="cards">
+
+        <h2 class="section-title">
+
+            Web Technologies
+
+        </h2>
+
+        <div class="card-container">
+
+            <!-- Card 1 -->
+
+            <div class="card">
+
+                <h2>💻 HTML5</h2>
+
+                <p>
+
+                    HTML5 provides semantic elements,
+                    multimedia support,
+                    forms,
+                    canvas
+                    and responsive webpage structure.
+
+                </p>
+
+                <button>Learn HTML5</button>
+
+            </div>
+
+            <!-- Card 2 -->
+
+            <div class="card">
+
+                <h2>🎨 CSS3</h2>
+
+                <p>
+
+                    CSS3 enhances webpages using gradients,
+                    shadows,
+                    transitions,
+                    animations,
+                    hover effects
+                    and modern layouts.
+
+                </p>
+
+                <button>Learn CSS3</button>
+
+            </div>
+
+            <!-- Card 3 -->
+
+            <div class="card">
+
+                <h2>🖌 Canvas</h2>
+
+                <p>
+
+                    Canvas allows drawing
+                    rectangles,
+                    circles,
+                    lines,
+                    text,
+                    games,
+                    animations
+                    and graphics using JavaScript.
+
+                </p>
+
+                <button>Learn Canvas</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer id="footer">
+
+        <h3>
+
+            Developed By
+
+        </h3>
+
+        <p>
+
+            Karimajji Vinay
+
+        </p>
+
+        <p>
+
+            CSE (AI & ML)
+
+        </p>
+
+        <p>
+
+            Anil Neerukonda Institute of Technology and Sciences (ANITS)
+
+        </p>
+
+        <br>
+
+        <p>
+
+            © 2026 All Rights Reserved
+
+        </p>
+
+    </footer>
+
+
+    <!-- ================= CANVAS SCRIPT ================= -->
+
+    <script>
+
+        const canvas = document.getElementById("myCanvas");
+
+        const ctx = canvas.getContext("2d");
+
+
+        /* Rectangle */
+
+        ctx.fillStyle = "#2563eb";
+
+        ctx.fillRect(40, 40, 180, 120);
+
+
+        /* Circle */
+
+        ctx.beginPath();
+
+        ctx.arc(380, 100, 60, 0, Math.PI * 2);
+
+        ctx.fillStyle = "#10b981";
+
+        ctx.fill();
+
+
+        /* Line */
+
+        ctx.beginPath();
+
+        ctx.moveTo(520, 40);
+
+        ctx.lineTo(780, 160);
+
+        ctx.strokeStyle = "#ef4444";
+
+        ctx.lineWidth = 5;
+
+        ctx.stroke();
+
+
+        /* Text */
+
+        ctx.font = "30px Poppins";
+
+        ctx.fillStyle = "#111827";
+
+        ctx.fillText("Karimajji Vinay", 240, 280);
+
+    </script>
+
+</body>
+
+</html>
