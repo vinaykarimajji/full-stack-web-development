@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Profile</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 40px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #profile {
+            width: 350px;
+            margin: 25px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+            text-align: left;
+        }
+
+        #profile h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        #profile p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Student Profile</h1>
+
+    <button id="showButton">Show Student Profile</button>
+
+    <div id="profile"></div>
+
+    <script>
+        // Student class
+        class Student {
+            constructor(name, rollNumber, department, cgpa) {
+                this.name = name;
+                this.rollNumber = rollNumber;
+                this.department = department;
+                this.cgpa = cgpa;
+            }
+        }
+
+        // Creating Student object
+        const student = new Student(
+            "Vinay",
+            "A24126552086",
+            "CSE (AI & ML)",
+            "8.86"
+        );
+
+        // DOM selection
+        const button = document.getElementById("showButton");
+        const profile = document.getElementById("profile");
+
+        // Event handling
+        button.addEventListener("click", function () {
+
+            // Clear previous content
+            profile.innerHTML = "";
+
+            // Create elements dynamically
+            const heading = document.createElement("h2");
+            heading.textContent = "Student Profile";
+
+            const name = document.createElement("p");
+            name.textContent = "Name : " + student.name;
+
+            const roll = document.createElement("p");
+            roll.textContent = "Roll No : " + student.rollNumber;
+
+            const department = document.createElement("p");
+            department.textContent = "Department : " + student.department;
+
+            const cgpa = document.createElement("p");
+            cgpa.textContent = "CGPA : " + student.cgpa;
+
+            // Add elements to webpage
+            profile.appendChild(heading);
+            profile.appendChild(name);
+            profile.appendChild(roll);
+            profile.appendChild(department);
+            profile.appendChild(cgpa);
+        });
+    </script>
+
+</body>
+</html>
