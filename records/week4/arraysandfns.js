@@ -5,22 +5,22 @@ console.log("Original Array:", fruits);
 // Array property
 console.log("Array Length:", fruits.length);
 
-// Access element
+// Access first element
 console.log("First Element:", fruits[0]);
 
-// Add element at end
+// Add element at the end
 fruits.push("Grapes");
 console.log("After push:", fruits);
 
-// Remove element from end
+// Remove element from the end
 fruits.pop();
 console.log("After pop:", fruits);
 
-// Add element at beginning
+// Add element at the beginning
 fruits.unshift("Pineapple");
 console.log("After unshift:", fruits);
 
-// Remove element from beginning
+// Remove element from the beginning
 fruits.shift();
 console.log("After shift:", fruits);
 
@@ -28,8 +28,7 @@ console.log("After shift:", fruits);
 fruits.sort();
 console.log("After sort:", fruits);
 
-
-// Function to display array
+// Function to display array elements
 function displayArray(arr) {
     console.log("Array Elements:");
 
@@ -41,13 +40,12 @@ function displayArray(arr) {
 // Calling function
 displayArray(fruits);
 
-
-// Function to find sum
+// Function to find sum of numbers
 function findSum(numbers) {
     let sum = 0;
 
     for (let i = 0; i < numbers.length; i++) {
-        sum = sum + numbers[i];
+        sum += numbers[i];
     }
 
     return sum;
