@@ -40,6 +40,8 @@ function displayArray(arr) {
 // Calling function
 displayArray(fruits);
 
+// Number array
+let numbers = [10, 20, 30, 40, 50];
 // Function to find sum of numbers
 function findSum(numbers) {
     let sum = 0;
@@ -50,9 +52,6 @@ function findSum(numbers) {
 
     return sum;
 }
-
-// Number array
-let numbers = [10, 20, 30, 40, 50];
 
 console.log("Numbers:", numbers);
 console.log("Sum:", findSum(numbers));
