@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Example</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 50px;
+        }
+
+        .box {
+            background: white;
+            width: 400px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        #message {
+            padding: 15px;
+            background-color: #e8f0ff;
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1 id="heading">Student Information</h1>
+
+        <p id="message">
+            Name: Vinay
+        </p>
+
+        <button id="contentBtn">
+            Change Content
+        </button>
+
+        <button id="styleBtn">
+            Change Style
+        </button>
+
+        <button id="attributeBtn">
+            Change Attribute
+        </button>
+
+    </div>
+
+
+    <script>
+
+        // Select HTML elements
+        let heading = document.getElementById("heading");
+        let message = document.getElementById("message");
+
+        // Change content
+        document.getElementById("contentBtn")
+            .addEventListener("click", function() {
+
+                message.textContent =
+                    "Name: Vinay | Branch: CSE (AI & ML)";
+
+            });
+
+
+        // Change style
+        document.getElementById("styleBtn")
+            .addEventListener("click", function() {
+
+                heading.style.color = "blue";
+                message.style.backgroundColor = "lightgreen";
+                message.style.fontSize = "20px";
+
+            });
+
+
+        // Change attribute
+        document.getElementById("attributeBtn")
+            .addEventListener("click", function() {
+
+                message.setAttribute(
+                    "title",
+                    "Student information updated"
+                );
+
+                heading.textContent =
+                    "Updated Student Information";
+
+            });
+
+    </script>
+
+</body>
+</html>
