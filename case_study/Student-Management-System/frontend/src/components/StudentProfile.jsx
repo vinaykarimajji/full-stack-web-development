@@ -26,7 +26,7 @@ function StudentProfile({ student, onBack, onEdit }) {
 
       <section className="profile-card">
         <div className="profile-banner">
-          <span>STUDIA / STUDENT DIRECTORY</span>
+          <span>EDUNEXUS / STUDENT DIRECTORY</span>
           <span className="profile-status">
             <span className="online-dot"></span> REGISTERED
           </span>

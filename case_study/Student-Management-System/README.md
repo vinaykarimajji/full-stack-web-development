@@ -1,4 +1,4 @@
-# STUDIA – Student Management System
+# EDUNEXUS – Student Management System
 
 A full-stack web application designed to manage student records through a centralized institutional dashboard, developed as part of the **Full-Stack Web Development (23CM4121) Unit V Case Study**.
 

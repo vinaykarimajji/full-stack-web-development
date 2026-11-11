@@ -190,7 +190,7 @@ function App() {
         <div className="brand">
           <div className="brand-icon">S.</div>
           <div>
-            <h2>STUDIA</h2>
+            <h2>EDUNEXUS</h2>
             <span>INSTITUTIONAL SYSTEM</span>
           </div>
           <button
@@ -565,7 +565,7 @@ function App() {
           </section>
 
           <footer className="page-footer">
-            <span>STUDIA © 2026</span>
+            <span>EDUNEXUS © 2026</span>
             <span>STUDENT MANAGEMENT SYSTEM</span>
           </footer>
 

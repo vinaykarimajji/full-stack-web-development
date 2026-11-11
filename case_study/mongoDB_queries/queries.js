@@ -1,11 +1,13 @@
 // ==============================================================================
 // Course: Full-Stack Web Development (23CM4121) - Unit V Case Study
-// Student: K.Vinay | Roll No: A24126552086
+// Student: K.Vinay | Roll No: A24126552086 | Branch: CSE (AI & ML)
+// Project: EDUNEXUS - Institutional Student Management System
 // Topic: Write MongoDB queries to perform operations on a students collection:
 //        (a) Insert a student record
 //        (b) Retrieve all student records
 //        (c) Update a student's department
 //        (d) Delete a student record
+//        + Comprehensive MongoDB Aggregation Pipeline Operations
 // Database: collegeDB | Collection: students
 // ==============================================================================
 
@@ -125,6 +127,67 @@ db.students.deleteOne({ rollNumber: "TEST-ROLL-999" });
 
 // Verify that the record was deleted successfully (should return null)
 db.students.findOne({ rollNumber: "TEST-ROLL-999" });
+
+// ==============================================================================
+// (e) MONGODB AGGREGATION PIPELINE OPERATIONS
+// ==============================================================================
+
+// Aggregation 1: Group students by department and count total enrollment
+db.students.aggregate([
+    {
+        $group: {
+            _id: "$department",
+            totalStudents: { $sum: 1 }
+        }
+    },
+    {
+        $sort: { totalStudents: -1 }
+    }
+]);
+
+// Aggregation 2: Multi-stage pipeline: Filter 3rd Year students, group by department
+db.students.aggregate([
+    {
+        $match: { year: "3rd Year" }
+    },
+    {
+        $group: {
+            _id: "$department",
+            count: { $sum: 1 },
+            studentNames: { $push: "$name" }
+        }
+    },
+    {
+        $project: {
+            department: "$_id",
+            count: 1,
+            studentNames: 1,
+            _id: 0
+        }
+    },
+    {
+        $sort: { count: -1 }
+    }
+]);
+
+// Aggregation 3: Project with conditional expressions (Academic status categorization)
+db.students.aggregate([
+    {
+        $project: {
+            rollNumber: 1,
+            name: 1,
+            department: 1,
+            year: 1,
+            academicStatus: {
+                $cond: {
+                    if: { $in: ["$year", ["3rd Year", "4th Year"]] },
+                    then: "Senior Tier",
+                    else: "Junior Tier"
+                }
+            }
+        }
+    }
+]);
 
 // ==============================================================================
 // ADDITIONAL EXTENSION: INDEXING & PERFORMANCE

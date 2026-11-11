@@ -9,6 +9,7 @@
 **Roll Number:** A24126552086  
 **Academic Year / Semester:** 3rd Year – 1st Semester (2026–27)  
 **Faculty / Guide:** P. Santosh Kumar  
+**Project Name:** **EDUNEXUS – Institutional Student Management System**  
 
 ---
 
@@ -18,7 +19,8 @@
 > (a) Insert a student record  
 > (b) Retrieve all student records  
 > (c) Update a student's department  
-> (d) Delete a student record"**
+> (d) Delete a student record  
+> + MongoDB Aggregation Pipeline Operations"**
 
 ---
 
@@ -26,23 +28,23 @@
 
 ```text
 case_study/
-├── A24126552086_FSWD_CASESTUDY_DOCUMENTATION.pdf   # 21-Page Comprehensive Case Study Documentation
+├── A24126552086_FSWD_CASESTUDY_DOCUMENTATION.pdf   # 23-Page Comprehensive Case Study Documentation (Navy/Teal Theme)
 ├── README.md                                       # Top-level case study overview and guide
 ├── mongoDB_queries/                                # Pure MongoDB Shell scripts & CLI runner
-│   ├── queries.js                                  # MongoDB shell (mongosh) queries (a, b, c, d)
+│   ├── queries.js                                  # MongoDB shell (mongosh) queries (a, b, c, d + aggregations)
 │   ├── run_mongo_queries.js                        # Node.js automated runner & formatted CLI output
 │   └── README.md                                   # MongoDB operations guide & documentation
-├── output_screenshots/                             # High-resolution execution evidence & figures
+├── output_screenshots/                             # High-resolution execution evidence (EduNexus Obsidian/Electric Blue)
 │   ├── 01_dashboard.png                            # Institutional overview dashboard (Total: 5, Depts: 4)
-│   ├── 02_dashboard_2.png                          # Student directory table with search & filters
-│   ├── 03_add_new_student.png                      # Operation (a): Add student modal (K.Vinay)
+│   ├── 02_dashboard_2.png                          # Student directory table with search & department filters
+│   ├── 03_add_new_student.png                      # Operation (a): Add student modal (K.Vinay, A24126552086)
 │   ├── 04_view_student.png                         # Student profile view & credentials card
 │   ├── 05_edit_student.png                         # Operation (c): Update department to 'CSE (AI & ML)'
 │   ├── 06_delete_student.png                       # Operation (d): Delete confirmation dialog
-│   ├── 07_mongodb_queries_terminal.png             # CLI execution of queries (a, b, c, d)
+│   ├── 07_mongodb_queries_terminal.png             # CLI execution of queries (a, b, c, d + aggregations)
 │   ├── 08_mongodb_atlas.png                        # MongoDB Atlas Data Explorer showing collegeDB.students
 │   └── 09_cloud_deployment.png                    # Multi-cloud deployment status (Vercel & Render)
-└── Student-Management-System/                      # Full MERN Stack Web Application
+└── Student-Management-System/                      # Full MERN Stack Web Application (EduNexus)
     ├── backend/                                    # Express.js REST API + Mongoose ODM
     │   ├── models/Student.js                       # Mongoose Schema & validation
     │   ├── routes/studentRoutes.js                 # CRUD API endpoints (/api/students)
@@ -54,7 +56,7 @@ case_study/
     │   │   ├── components/StudentProfile.jsx       # Student profile view component
     │   │   ├── services/api.js                     # Axios REST API client
     │   │   ├── App.jsx                             # Main dashboard & directory controller
-    │   │   └── App.css                             # Dark/light themed modern UI styles
+    │   │   └── App.css                             # Obsidian & Electric Blue modern UI styles
     │   ├── index.html                              # HTML5 entrypoint
     │   ├── vite.config.js                          # Vite configuration
     │   ├── package.json                            # Frontend dependencies & build scripts
@@ -108,17 +110,34 @@ db.students.updateOne(
 db.students.deleteOne({ rollNumber: "TEST-ROLL-999" });
 ```
 
+### (e) MongoDB Aggregation Pipeline Operations
+```javascript
+// Pipeline 1: Group by department and compute total student enrollment
+db.students.aggregate([
+    { $group: { _id: "$department", totalStudents: { $sum: 1 } } },
+    { $sort: { totalStudents: -1 } }
+]);
+
+// Pipeline 2: Filter 3rd Year students, group by department with student names array
+db.students.aggregate([
+    { $match: { year: "3rd Year" } },
+    { $group: { _id: "$department", count: { $sum: 1 }, studentNames: { $push: "$name" } } },
+    { $project: { department: "$_id", count: 1, studentNames: 1, _id: 0 } },
+    { $sort: { count: -1 } }
+]);
+```
+
 ---
 
 ## 2. Quick Execution Guide
 
-### Run MongoDB Queries in Terminal
+### Run MongoDB Queries & Aggregations in Terminal
 ```bash
 cd case_study/mongoDB_queries
 node run_mongo_queries.js
 ```
 
-### Run the Full-Stack Web Application Locally
+### Run the EduNexus Web Application Locally
 1. **Backend:**
    ```bash
    cd case_study/Student-Management-System/backend
@@ -137,5 +156,5 @@ node run_mongo_queries.js
 
 ## 3. Comprehensive Documentation
 
-The complete 21-page institutional documentation is available as:
+The complete 23-page institutional documentation is available as:
 📄 **[A24126552086_FSWD_CASESTUDY_DOCUMENTATION.pdf](./A24126552086_FSWD_CASESTUDY_DOCUMENTATION.pdf)**

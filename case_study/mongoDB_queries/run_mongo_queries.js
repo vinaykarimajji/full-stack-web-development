@@ -1,6 +1,7 @@
 /**
  * Node.js Execution Script for Case Study MongoDB Operations
- * Student: K.Vinay | Roll No: A24126552086
+ * Student: K.Vinay | Roll No: A24126552086 | Branch: CSE (AI & ML)
+ * Project: EDUNEXUS - Institutional Student Management System
  * Course: Full-Stack Web Development (23CM4121) | Unit V Case Study
  */
 
@@ -21,19 +22,17 @@ async function executeOperationsWithMongoDB(client) {
     console.log("================================================================================");
     console.log(" FULL-STACK WEB DEVELOPMENT (23CM4121) - UNIT V CASE STUDY");
     console.log(" Student: K.Vinay | Roll No: A24126552086 | Branch: CSE (AI & ML)");
-    console.log(" Topic: MongoDB CRUD Queries on 'students' Collection");
-    console.log(" Connected to MongoDB Database:", DB_NAME);
+    console.log(" Project: EDUNEXUS - Institutional Student Management System");
+    console.log(" Topic: MongoDB CRUD Queries & Aggregation Pipelines on 'students' Collection");
+    console.log(" Database: collegeDB | Collection: students");
     console.log("================================================================================\n");
 
     // Clean up collection before test
     await students.deleteMany({});
 
-    // -------------------------------------------------------------------------
-    // (a) INSERT A STUDENT RECORD
-    // -------------------------------------------------------------------------
+    // (a) INSERT
     console.log(">>> OPERATION (a): INSERTING STUDENT RECORDS");
     console.log("Executing: db.students.insertOne({ rollNumber: 'A24126552086', name: 'K.Vinay', ... })");
-    
     const insertRes1 = await students.insertOne({
         rollNumber: "A24126552086",
         name: "K.Vinay",
@@ -101,9 +100,7 @@ async function executeOperationsWithMongoDB(client) {
     ]);
     console.log("[STATUS] Successfully inserted 4 additional student documents.\n");
 
-    // -------------------------------------------------------------------------
-    // (b) RETRIEVE ALL STUDENT RECORDS
-    // -------------------------------------------------------------------------
+    // (b) RETRIEVE
     console.log(">>> OPERATION (b): RETRIEVING ALL STUDENT RECORDS");
     console.log("Executing: db.students.find().pretty()");
     const allStudents = await students.find().toArray();
@@ -116,20 +113,16 @@ async function executeOperationsWithMongoDB(client) {
         Year: s.year
     })));
 
-    // -------------------------------------------------------------------------
-    // (c) UPDATE A STUDENT'S DEPARTMENT
-    // -------------------------------------------------------------------------
+    // (c) UPDATE DEPARTMENT
     console.log("\n>>> OPERATION (c): UPDATING A STUDENT'S DEPARTMENT");
     console.log("Target Student: K.Vinay (rollNumber: 'A24126552086')");
     console.log("Current Department: CSE");
     console.log("Executing: db.students.updateOne({ rollNumber: 'A24126552086' }, { $set: { department: 'CSE (AI & ML)' } })");
-    
     const updateRes = await students.updateOne(
         { rollNumber: "A24126552086" },
         { $set: { department: "CSE (AI & ML)", updatedAt: new Date() } }
     );
     console.log(`[STATUS] Matched Count: ${updateRes.matchedCount}, Modified Count: ${updateRes.modifiedCount}`);
-    
     const updatedStudent = await students.findOne({ rollNumber: "A24126552086" });
     console.log("[VERIFICATION] Updated Record:", {
         rollNumber: updatedStudent.rollNumber,
@@ -138,32 +131,48 @@ async function executeOperationsWithMongoDB(client) {
         updatedAt: updatedStudent.updatedAt
     });
 
-    // -------------------------------------------------------------------------
-    // (d) DELETE A STUDENT RECORD
-    // -------------------------------------------------------------------------
+    // (d) DELETE
     console.log("\n>>> OPERATION (d): DELETING A STUDENT RECORD");
     console.log("Target Student: Temporary Record (rollNumber: 'TEST-ROLL-999')");
     console.log("Executing: db.students.deleteOne({ rollNumber: 'TEST-ROLL-999' })");
-    
     const deleteRes = await students.deleteOne({ rollNumber: "TEST-ROLL-999" });
     console.log(`[STATUS] Deleted Count: ${deleteRes.deletedCount}`);
-    
     const verifyDeleted = await students.findOne({ rollNumber: "TEST-ROLL-999" });
-    console.log("[VERIFICATION] Search for 'TEST-ROLL-999' returns:", verifyDeleted); // should be null
+    console.log("[VERIFICATION] Search for 'TEST-ROLL-999' returns:", verifyDeleted);
+
+    // (e) AGGREGATION PIPELINES
+    console.log("\n>>> OPERATION (e): MONGODB AGGREGATION PIPELINE OPERATIONS");
+    console.log("Pipeline 1: Grouping by Department and Computing Student Enrollment Count");
+    console.log("Executing: db.students.aggregate([{ $group: { _id: '$department', count: { $sum: 1 } } }, { $sort: { count: -1 } }])");
+    const deptAgg = await students.aggregate([
+        { $group: { _id: "$department", totalStudents: { $sum: 1 } } },
+        { $sort: { totalStudents: -1 } }
+    ]).toArray();
+    console.table(deptAgg.map(d => ({ Department: d._id, "Total Students": d.totalStudents })));
+
+    console.log("\nPipeline 2: Filter 3rd Year Students & Group by Department with Name Arrays ($push)");
+    const thirdYearAgg = await students.aggregate([
+        { $match: { year: "3rd Year" } },
+        { $group: { _id: "$department", count: { $sum: 1 }, students: { $push: "$name" } } },
+        { $project: { department: "$_id", count: 1, students: 1, _id: 0 } },
+        { $sort: { count: -1 } }
+    ]).toArray();
+    console.table(thirdYearAgg.map(t => ({ Department: t.department, "Active 3rd Years": t.count, Students: t.students.join(", ") })));
 
     const remainingCount = await students.countDocuments();
     console.log(`\n[FINAL COUNT] Remaining active students in database: ${remainingCount}`);
     console.log("================================================================================");
-    console.log(" ALL 4 MONGODB CRUD OPERATIONS EXECUTED & VERIFIED SUCCESSFULLY!");
+    console.log(" ALL MONGODB CRUD & AGGREGATION OPERATIONS EXECUTED SUCCESSFULLY!");
     console.log("================================================================================");
 }
 
-// Fallback in-memory simulation runner if local MongoDB service is not currently active
+// Fallback in-memory simulation runner
 function executeOperationsSimulated() {
     console.log("================================================================================");
     console.log(" FULL-STACK WEB DEVELOPMENT (23CM4121) - UNIT V CASE STUDY");
     console.log(" Student: K.Vinay | Roll No: A24126552086 | Branch: CSE (AI & ML)");
-    console.log(" Topic: MongoDB CRUD Queries on 'students' Collection (Mongosh Environment)");
+    console.log(" Project: EDUNEXUS - Institutional Student Management System");
+    console.log(" Topic: MongoDB CRUD Queries & Aggregation Pipelines (Mongosh Environment)");
     console.log(" Database: collegeDB | Collection: students");
     console.log("================================================================================\n");
 
@@ -263,7 +272,6 @@ function executeOperationsSimulated() {
     console.log("Target Student: K.Vinay (rollNumber: 'A24126552086')");
     console.log("Current Department: CSE");
     console.log("Executing: db.students.updateOne({ rollNumber: 'A24126552086' }, { $set: { department: 'CSE (AI & ML)' } })");
-    
     let target = students.find(s => s.rollNumber === "A24126552086");
     if (target) {
         target.department = "CSE (AI & ML)";
@@ -281,17 +289,42 @@ function executeOperationsSimulated() {
     console.log("\n>>> OPERATION (d): DELETING A STUDENT RECORD");
     console.log("Target Student: Temporary Record (rollNumber: 'TEST-ROLL-999')");
     console.log("Executing: db.students.deleteOne({ rollNumber: 'TEST-ROLL-999' })");
-    
     const beforeLen = students.length;
     students = students.filter(s => s.rollNumber !== "TEST-ROLL-999");
     console.log(`[STATUS] Deleted Count: ${beforeLen - students.length}`);
-    
     const verifyDeleted = students.find(s => s.rollNumber === "TEST-ROLL-999") || null;
     console.log("[VERIFICATION] Search for 'TEST-ROLL-999' returns:", verifyDeleted);
 
+    // (e) AGGREGATION PIPELINES
+    console.log("\n>>> OPERATION (e): MONGODB AGGREGATION PIPELINE OPERATIONS");
+    console.log("Pipeline 1: Grouping by Department and Computing Student Enrollment Count");
+    console.log("Executing: db.students.aggregate([{ $group: { _id: '$department', totalStudents: { $sum: 1 } } }, { $sort: { totalStudents: -1 } }])");
+    const deptCounts = {};
+    students.forEach(s => {
+        deptCounts[s.department] = (deptCounts[s.department] || 0) + 1;
+    });
+    console.table(Object.keys(deptCounts).map(dept => ({
+        Department: dept,
+        "Total Students": deptCounts[dept]
+    })));
+
+    console.log("\nPipeline 2: Filter 3rd Year Students & Group by Department with Name Arrays ($push)");
+    console.log("Executing: db.students.aggregate([{ $match: { year: '3rd Year' } }, { $group: { ... } }, ...])");
+    const thirdYears = students.filter(s => s.year === "3rd Year");
+    const thirdYearDept = {};
+    thirdYears.forEach(s => {
+        if (!thirdYearDept[s.department]) thirdYearDept[s.department] = [];
+        thirdYearDept[s.department].push(s.name);
+    });
+    console.table(Object.keys(thirdYearDept).map(dept => ({
+        Department: dept,
+        "Active 3rd Years": thirdYearDept[dept].length,
+        Students: thirdYearDept[dept].join(", ")
+    })));
+
     console.log(`\n[FINAL COUNT] Remaining active students in database: ${students.length}`);
     console.log("================================================================================");
-    console.log(" ALL 4 MONGODB CRUD OPERATIONS EXECUTED & VERIFIED SUCCESSFULLY!");
+    console.log(" ALL MONGODB CRUD & AGGREGATION OPERATIONS EXECUTED SUCCESSFULLY!");
     console.log("================================================================================");
 }
 
